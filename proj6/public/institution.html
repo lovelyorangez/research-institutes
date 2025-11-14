@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Institution Details</title>
+<!-- Google Fonts for a modern look -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+
+<style>
+  /* Reset & base styles */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #dbeafe, #f0fdfa);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    overflow: auto;
+  }
+
+  /* Container styling with glass-morphism effect */
+  .container {
+    max-width: 750px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    padding: 40px 30px;
+    position: relative;
+    animation: slideIn 0.8s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes slideIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  }
+
+  /* Back Button */
+  .back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: linear-gradient(135deg, #14b8a6, #06b6d4);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s, transform 0.2s;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+  .back-button:hover {
+    background: linear-gradient(135deg, #0f766e, #075985);
+    transform: translateY(-2px);
+  }
+
+  /* Profile section styles */
+  .profile-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+  }
+  .profile-pic {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 4px solid #06b6d4;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .profile-pic:hover {
+    transform: scale(1.05);
+    border-color: #14b8a6;
+  }
+
+  /* Info card styles */
+  .info-card {
+    margin-top: 30px;
+    background: rgba(255,255,255,0.15);
+    padding: 24px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+    backdrop-filter: blur(8px);
+    transition: background 0.3s, box-shadow 0.3s;
+  }
+  .info-card:hover {
+    background: rgba(255,255,255,0.2);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  }
+
+  /* Institution title */
+  #inst-name {
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #16a34a, #22c55e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  #inst-desc {
+  white-space: pre-line;
+}
+
+
+  /* Info details */
+  p {
+    font-size: 1.15rem;
+    margin: 8px 0;
+    color: #374151;
+  }
+  strong {
+    font-weight: 600;
+    color: #6b7280;
+  }
+
+  /* Modal overlay for image zoom */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    inset: 0;
+    background-color: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+  }
+  .modal.show {
+    display: flex;
+  }
+  .modal img {
+    max-width: 90%;
+    max-height: 80vh;
+    border-radius: 20px;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .modal img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+  }
+
+  /* Close button on modal */
+  .close-btn {
+    position: absolute;
+    top: 30px;
+    right: 50px;
+    font-size: 2.5rem;
+    color: #fff;
+    cursor: pointer;
+    transition: color 0.3s, transform 0.3s;
+  }
+  .close-btn:hover {
+    color: #facc15;
+    transform: scale(1.1);
+  }
+
+  /* Responsive text size for smaller screens */
+  @media(max-width: 600px){
+    #inst-name {
+      font-size: 1.6rem;
+    }
+    .info-card {
+      padding: 20px;
+    }
+    .back-button {
+      font-size: 0.9rem;
+    }
+    /* Preserves \n and \n\n as visible line breaks */
+}
+
+  
+</style>
+</head>
+<body>
+
+<!-- Main container -->
+<div class="container">
+  <!-- Back Button -->
+  <a class="back-button" onclick="window.close()">← Back</a>
+  
+  <!-- Profile picture -->
+  <div class="profile-section">
+    <img id="institution-image" class="profile-pic" src="" alt="Institution Logo" aria-label="Institution Logo" />
+  </div>
+
+  <!-- Institution information card -->
+  <div class="info-card" role="region" aria-label="Institution Details">
+    <h2 id="inst-name">Loading...</h2>
+    <p><strong>Type:</strong> <span id="inst-type">-</span></p>
+    <p><strong>State:</strong> <span id="inst-state">-</span></p>
+    <p><strong>Description:</strong></p>
+    <p id="inst-desc">Loading description...</p>
+  </div>
+</div>
+
+<!-- Modal for Image Preview -->
+<div id="imageModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+  <span id="closeModal" class="close-btn" aria-label="Close">&times;</span>
+  <img id="modalImage" src="" alt="Institution Image" />
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const name = urlParams.get('name');
+
+    if (!name) {
+      document.querySelector('#inst-name').textContent = 'Institution Not Found';
+      document.querySelector('#inst-desc').textContent = 'No data available.';
+      return;
+    }
+
+    try {
+      const res = await fetch(`/api/getInstitution?name=${encodeURIComponent(name)}`);
+      if (!res.ok) throw new Error('Resource not found');
+
+      const data = await res.json();
+
+      // Populate the details
+      document.getElementById('inst-name').textContent = data.name || 'N/A';
+      document.getElementById('inst-type').textContent = data.type || 'N/A';
+      document.getElementById('inst-state').textContent = data.state || 'N/A';
+      document.getElementById('inst-desc').textContent = data.description || 'No description available.';
+
+      const imgEl = document.getElementById('institution-image');
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      const closeBtn = document.getElementById('closeModal');
+
+      const imageSrc = data.image ? `/images/${data.image}` : '/images/default.png';
+      imgEl.src = imageSrc;
+
+      // Open modal on click
+      imgEl.onclick = () => {
+        modal.classList.add('show');
+        modal.setAttribute('aria-hidden', 'false');
+        modalImg.src = imageSrc;
+        closeBtn.focus();
+      };
+
+      // Close modal on click
+      closeBtn.onclick = () => {
+        modal.classList.remove('show');
+        modal.setAttribute('aria-hidden', 'true');
+        imgEl.focus();
+      };
+
+      // Close modal on outside click
+      modal.onclick = (e) => {
+        if (e.target === modal) {
+          modal.classList.remove('show');
+          modal.setAttribute('aria-hidden', 'true');
+          imgEl.focus();
+        }
+      };
+
+      // Close modal on Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('show')) {
+          modal.classList.remove('show');
+          modal.setAttribute('aria-hidden', 'true');
+          imgEl.focus();
+        }
+      });
+
+    } catch (err) {
+      console.error(err);
+      document.querySelector('#inst-name').textContent = 'Error loading data';
+      document.querySelector('#inst-desc').textContent = 'Please try again later.';
+    }
+  });
+</script>
+
+</body>
+</html>

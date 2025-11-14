@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Welcome - Institution Explorer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --gradient-bg: linear-gradient(122deg, #cad9e9 0%, #f5f6fa 70%, #e6eaf3 100%);
+      --glass-bg: rgba(255,255,255,0.65);
+      --glass-border: rgba(210,222,238,0.45);
+      --accent: #7b9cb6;
+      --dark: #24364d;
+      --shadow: 0 5px 44px 0 rgba(54, 82, 128, 0.09);
+      --radius: 30px;
+      --transition: 0.22s cubic-bezier(.5,1.65,.45,1);
+      --feature-bg: #f9fafb;
+      --feature-hover: #e3eaf3;
+    }
+    html, body {
+      width: 100%; height: 100%;
+      font-family: 'Inter', 'Poppins', sans-serif;
+      background: var(--gradient-bg);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow-x: hidden;
+    }
+    body {
+      justify-content: center;
+    }
+    .container {
+      width: 90vw; max-width: 1080px; min-height: 510px;
+      display: flex; flex-direction: row; align-items: center; justify-content: space-between;
+      border-radius: var(--radius);
+      background: var(--glass-bg);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(13px);
+      border: 1.5px solid var(--glass-border);
+      margin: 40px auto;
+      position: relative;
+      overflow: hidden;
+      animation: fadePageIn 1.1s cubic-bezier(.47,1,.41,.97);
+    }
+    @keyframes fadePageIn {
+      from { opacity: 0; filter: blur(18px);}
+      to { opacity: 1; filter: none;}
+    }
+    .left, .right {
+      flex: 1 1 50%;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 58px 45px 48px 70px;
+      z-index: 2;
+    }
+    .right {
+      align-items: flex-end;
+      padding: 48px 70px 48px 32px;
+    }
+    .logo {
+      font-size: 3.5rem;
+      margin-bottom: 18px;
+      color: var(--accent);
+      filter: drop-shadow(0 0 24px #b5c9d717);
+      animation: logoSoftFloat 2.8s infinite alternate cubic-bezier(.67,1.15,.42,1.05);
+    }
+    @keyframes logoSoftFloat {
+      0%   { transform: translateY(0);}
+      100% { transform: translateY(-10px);}
+    }
+    h1 {
+      color: var(--dark);
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      letter-spacing: .04em;
+      line-height: 1.13;
+      background: linear-gradient(90deg, var(--accent) 14%, #97adc8 89%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .subtitle {
+      color: #5e768f;
+      font-size: 1.12rem;
+      opacity: .83;
+      margin-bottom: 38px;
+      font-weight: 500;
+      line-height: 1.7;
+      letter-spacing: .01em;
+      transition: color var(--transition);
+    }
+    .btn-container {
+      display: flex; flex-direction: row; gap: 20px;
+      margin-bottom: 12px;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 13px 32px;
+      font-size: 1.03rem;
+      font-weight: 700;
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      background: linear-gradient(95deg,#84a3bb 25%,#c1d8ed 100%);
+      box-shadow: 0 3px 18px #b6c2de22;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
+      position: relative;
+      overflow: hidden;
+      outline: none;
+      letter-spacing: .02em;
+    }
+    .btn:hover {
+      background: linear-gradient(110deg, #527397 74%, #87bfd8 100%);
+      box-shadow: 0 7px 33px #8da1bf44;
+      transform: translateY(-3px) scale(1.045);
+    }
+    .btn .icon {
+      font-size: 1.21em;
+      color: #fdfdfd;
+      filter: drop-shadow(0 1.5px 5px #c1d8ed66);
+    }
+
+    .features {
+      width: 340px; max-width: 90vw;
+      background: var(--feature-bg);
+      border-radius: 18px;
+      padding: 23px 29px;
+      box-shadow: 0 2px 11px #7b9cb610;
+      display: flex; flex-direction: column; gap: 15px;
+      animation: featuresIn 1.25s cubic-bezier(.45,1.05,.42,1.01);
+    }
+    @keyframes featuresIn {
+      0% { opacity: 0; transform: translateY(35px);}
+      100% { opacity: 1; transform: none;}
+    }
+    .feature {
+      background: #f2f5fa;
+      border-radius: 11px;
+      padding: 11px 19px;
+      display: flex; align-items: center; gap: 11px;
+      color: #577596;
+      font-size: 1.05rem;
+      font-weight: 700;
+      transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+      cursor: pointer;
+      box-shadow: 0 .5px 7px #b7c3da1c;
+      animation: fadeInFeature .66s backwards;
+    }
+    .feature:nth-child(2){animation-delay:.09s;}
+    .feature:nth-child(3){animation-delay:.2s;}
+    .feature i {
+      font-size: 1.35rem;
+      color: var(--accent);
+      background: #f6faff;
+      border-radius: 7px;
+      padding: 7px;
+      margin-right: 2px;
+      transition: color var(--transition), background var(--transition);
+    }
+    .feature:hover {
+      background: var(--feature-hover);
+      color: #24364d;
+      box-shadow: 0 2.5px 13px #a0b3cb2e;
+    }
+    .feature:hover i {
+      color: #6185a7;
+      background: #e9f1fb;
+    }
+
+    /* Decorative, gentle floating shapes (muted, not bright) */
+    .soft-bg {
+      position: absolute;
+      border-radius: 50%;
+      opacity: .17;
+      filter: blur(37px);
+      pointer-events: none;
+      z-index: 1;
+      animation: floatSoft 13s ease-in-out infinite alternate;
+    }
+    .soft-bg1 { width:230px; height:200px; background: #7ea5c194; top:-60px; left:-70px;}
+    .soft-bg2 { width:170px; height:140px; background: #b1bbd994; top:70%; left: 4vw;}
+    .soft-bg3 { width:120px; height:180px; background: #e3eaef90; bottom:17px; right: 85px;}
+    .soft-bg4 { width:100px; height:105px; background: #b0ccd5c9; top:39%; right: 24px;}
+    @keyframes floatSoft {
+      0% { transform: scale(1) translateY(0);}
+      100% { transform: scale(1.10) translateY(-25px);}
+    }
+    @media (max-width: 1000px) {
+      .container { flex-direction: column; min-height: unset; padding:12px;}
+      .left, .right {padding: 38px 7vw;}
+      .right { align-items:center;}
+      .features {width:98%;}
+    }
+    @media (max-width:700px){
+      .container{max-width:98vw; padding: 0; min-width:98vw;}
+      .left, .right { padding: 15px 3vw;}
+      .logo{font-size:2.1rem;}
+      h1{font-size:1.2rem;}
+      .btn{font-size:.94rem;}
+      .features{padding:10px 5px;}
+      .feature{font-size:.92rem;}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Muted floating shapes for soft, elegant interest -->
+    <div class="soft-bg soft-bg1"></div>
+    <div class="soft-bg soft-bg2"></div>
+    <div class="soft-bg soft-bg3"></div>
+    <div class="soft-bg soft-bg4"></div>
+
+    <div class="left">
+      <div class="logo">
+        <i class="fas fa-university"></i>
+      </div>
+      <h1>Institution Explorer</h1>
+      <p class="subtitle">
+        Discover and explore educational institutions with our interactive platform.<br>
+        Navigate detailed information and connect calmly across the country.
+      </p>
+      <div class="btn-container">
+        <a href="/explore" class="btn">
+          <i class="fas fa-map-marker-alt icon"></i>
+          Explore Map
+        </a>
+        <a href="http://localhost:8080" class="btn" style="background:linear-gradient(95deg,#97adc8 10%,#7b9cb6 90%)">
+          <i class="fas fa-robot icon"></i>
+          Chat with Bot
+        </a>
+      </div>
+    </div>
+    <div class="right">
+      <div class="features">
+        <div class="feature"><i class="fas fa-search"></i>Search & Discover</div>
+        <div class="feature"><i class="fas fa-map"></i>Interactive Maps</div>
+        <div class="feature"><i class="fas fa-comments"></i>AI Assistant</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
