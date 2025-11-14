@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InstitutionGPT – Your Institutional Assistant</title>
+
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="static/style.css">
+  
+  <!-- Icons & Fonts -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
+</head>
+<body>
+  <!-- Light blue gradient background -->
+  <div class="bg-canvas"></div>
+  
+  <!-- Floating particles animation -->
+  <div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+
+  <!-- Main landscape container -->
+  <div class="landscape-shell">
+    
+    <!-- Left sidebar for branding -->
+    <aside class="brand-sidebar glass-panel">
+      <div class="brand-content">
+        <div class="logo-section">
+          <i class="fas fa-university brand-icon"></i>
+          <div class="brand-text">
+            <h1>InstitutionGPT</h1>
+            <p>Your Institutional Assistant</p>
+          </div>
+        </div>
+        
+        <div class="status-badge">
+          <span class="pulse-dot"></span>
+          <span>AI Online</span>
+        </div>
+        
+        <div class="feature-highlights">
+          <div class="feature">🎓 Education Guidance</div>
+          <div class="feature">🏥 Healthcare Navigation</div>
+          <div class="feature">🏛️ Government Services</div>
+          <div class="feature">🏢 Corporate Insights</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main chat area -->
+    <main class="chat-workspace">
+      
+      <!-- Chat header -->
+      <header class="chat-header glass-panel">
+        <div class="conversation-title">
+          <h2>Conversation</h2>
+          <span class="session-indicator">New Session</span>
+        </div>
+        <div class="header-actions">
+          <button class="action-btn" title="Clear Chat"><i class="fas fa-trash-alt"></i></button>
+          <button class="action-btn" title="Export Chat"><i class="fas fa-download"></i></button>
+          <button class="action-btn" title="Settings"><i class="fas fa-cog"></i></button>
+        </div>
+      </header>
+
+      <!-- Messages area -->
+      <section class="message-stream" id="chatMessages">
+        
+        <!-- Welcome message -->
+        <article class="message-wrapper bot-message fade-up">
+          <div class="avatar-container">
+            <div class="message-avatar bot-avatar">
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+          </div>
+          
+          <div class="message-bubble glass-message">
+            <div class="message-content">
+              <p>Welcome to InstitutionGPT! 🏛️ I'm your specialized assistant for navigating institutional matters. Whether you need guidance on universities, healthcare systems, government agencies, or corporate structures, I'm here to provide personalized assistance.</p>
+              <p><strong>How can I help you today?</strong></p>
+            </div>
+            <time class="timestamp" id="welcomeTime">Just now</time>
+          </div>
+        </article>
+
+        <!-- Quick actions panel -->
+        <section class="quick-actions-panel glass-panel fade-up" id="quickActions">
+          <h3><i class="fas fa-sparkles"></i> Popular Topics</h3>
+          
+          <div class="topics-grid">
+            <button class="topic-card" data-message="Help me understand college admission requirements">
+              <div class="topic-icon">🎓</div>
+              <div class="topic-content">
+                <h4>College Admissions</h4>
+                <p>Requirements & guidance</p>
+              </div>
+            </button>
+            
+            <button class="topic-card" data-message="What should I know about healthcare institutions?">
+              <div class="topic-icon">🏥</div>
+              <div class="topic-content">
+                <h4>Healthcare Systems</h4>
+                <p>Navigation & services</p>
+              </div>
+            </button>
+            
+            <button class="topic-card" data-message="Guide me through government agency processes">
+              <div class="topic-icon">🏛️</div>
+              <div class="topic-content">
+                <h4>Government Services</h4>
+                <p>Processes & procedures</p>
+              </div>
+            </button>
+            
+            <button class="topic-card" data-message="Help me understand corporate organizational structures">
+              <div class="topic-icon">🏢</div>
+              <div class="topic-content">
+                <h4>Corporate Structure</h4>
+                <p>Organizations & hierarchy</p>
+              </div>
+            </button>
+            
+            <button class="topic-card" data-message="Tell me about non-profit institutions">
+              <div class="topic-icon">🤝</div>
+              <div class="topic-content">
+                <h4>Non-Profit Orgs</h4>
+                <p>Structure & operations</p>
+              </div>
+            </button>
+            
+            <button class="topic-card" data-message="How do I research institutional policies?">
+              <div class="topic-icon">📋</div>
+              <div class="topic-content">
+                <h4>Policy Research</h4>
+                <p>Methods & resources</p>
+              </div>
+            </button>
+          </div>
+        </section>
+        
+      </section>
+
+      <!-- Input composer -->
+      <footer class="message-composer glass-panel">
+        <div class="composer-wrapper">
+          <div class="input-container">
+            <input type="text" id="messageInput" 
+                   placeholder="Ask about institutions, policies, admissions, or any organizational guidance..." 
+                   autocomplete="off">
+            <button id="sendButton" class="send-btn" title="Send Message">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+          
+          <div class="composer-actions">
+            <button class="tool-btn" title="Attach File"><i class="fas fa-paperclip"></i></button>
+            <button class="tool-btn" title="Voice Input"><i class="fas fa-microphone"></i></button>
+            <button class="tool-btn" title="Emoji"><i class="fas fa-smile"></i></button>
+          </div>
+        </div>
+
+        <!-- Typing indicator -->
+        <div class="typing-indicator" id="typingIndicator">
+          <div class="typing-animation">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+          <span class="typing-text">InstitutionGPT is thinking...</span>
+        </div>
+      </footer>
+      
+    </main>
+  </div>
+
+  <script src="static/script.js"></script>
+</body>
+</html>
